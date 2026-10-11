@@ -1,0 +1,17 @@
+$ git switch -q main && git pull -q && git log --oneline -3
+b3ad72d Bozuk kayıt satırını atla ve uyar (#6) (#7)
+6dec146 Yürüyen örnek: kafedeki insansı robotun vardiya raporu (#5)
+1a6c653 Hafta 2–4 gerçek koşum kayıtları ve README açıklaması (#4)
+$ gh release create v2.0.0 -R ForenlyAI/github-codespaces-kurs --title "v2.0.0" --generate-notes
+https://github.com/ForenlyAI/github-codespaces-kurs/releases/tag/v2.0.0
+$ gh release view v2.0.0 -R ForenlyAI/github-codespaces-kurs --json body --jq .body
+## What's Changed
+* Hafta 2–4 gerçek koşum kayıtları by @ForenlyAI in https://github.com/ForenlyAI/github-codespaces-kurs/pull/4
+* Yürüyen örnek: kafedeki insansı robotun vardiya raporu by @ForenlyAI in https://github.com/ForenlyAI/github-codespaces-kurs/pull/5
+* Bozuk kayıt satırını atla ve uyar by @ForenlyAI in https://github.com/ForenlyAI/github-codespaces-kurs/pull/7
+
+
+**Full Changelog**: https://github.com/ForenlyAI/github-codespaces-kurs/compare/v1.0.0...v2.0.0
+$ gh release list -R ForenlyAI/github-codespaces-kurs
+v2.0.0	Latest	v2.0.0	2026-10-11T11:03:29Z
+v1.0.0		v1.0.0	2026-10-11T09:43:17Z

@@ -1,0 +1,15 @@
+$ git switch -q main && git pull -q && git log --oneline -3
+76a9b95 CI: üç Python sürümü ve pip önbelleği
+8ea3039 Süreyi tam dakikaya yuvarla (#7)
+4ce1025 CI: her gönderimde ruff ve pytest
+$ git tag -a v0.1.0 -m "İlk sürüm: süre, başarı, türe göre rapor" && git push -q origin v0.1.0 && git tag
+v0.1.0
+$ gh release create v0.1.0 -R ForenlyAI/github-codespaces-lab --title "v0.1.0" --generate-notes
+https://github.com/ForenlyAI/github-codespaces-lab/releases/tag/v0.1.0
+$ gh release view v0.1.0 -R ForenlyAI/github-codespaces-lab --json tagName,name,body --jq '.body'
+## What's Changed
+* Görev türüne göre rapor by @ForenlyAI in https://github.com/ForenlyAI/github-codespaces-lab/pull/6
+* Süreyi tam dakikaya yuvarla by @ForenlyAI in https://github.com/ForenlyAI/github-codespaces-lab/pull/7
+
+
+**Full Changelog**: https://github.com/ForenlyAI/github-codespaces-lab/commits/v0.1.0

@@ -1,0 +1,12 @@
+$ gh secret list --app codespaces -R ForenlyAI/github-codespaces-kurs
+ORNEK_ANAHTAR	2026-10-11T10:56:10Z
+$ gh codespace ssh -c kurs-vardiya-codespace-7r7gpj594vjhr5xx -- '[ -n "$ORNEK_ANAHTAR" ] && echo "ssh kabuğu: ORNEK_ANAHTAR tanımlı" || echo "ssh kabuğu: ORNEK_ANAHTAR yok"'
+ssh kabuğu: ORNEK_ANAHTAR yok
+$ gh codespace ssh -c kurs-vardiya-codespace-7r7gpj594vjhr5xx -- 'bash -lc "[ -n \"\$ORNEK_ANAHTAR\" ] && echo oturum kabuğu: ORNEK_ANAHTAR tanımlı || echo oturum kabuğu: ORNEK_ANAHTAR yok"'
+oturum kabuğu: ORNEK_ANAHTAR tanımlı
+$ gh codespace ssh -c kurs-vardiya-codespace-7r7gpj594vjhr5xx -- 'grep -c "^ORNEK_ANAHTAR=" /workspaces/.codespaces/shared/.env-secrets'
+1
+$ gh codespace ssh -c kurs-vardiya-codespace-7r7gpj594vjhr5xx -- 'grep -rl ORNEK_ANAHTAR /workspaces/github-codespaces-kurs --include=*.py --include=*.txt --include=*.md --include=*.json | wc -l'
+0
+$ gh secret list --app codespaces -R ForenlyAI/github-codespaces-kurs | wc -l
+0

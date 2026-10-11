@@ -1,0 +1,9 @@
+# gerçek kaydın kesiti: 4.2/matris.txt
+$ git commit -q -am "CI: üç Python sürümü ve pip önbelleği" && git push -q
+$ gh run view 38133501227 -R ForenlyAI/github-codespaces-lab
+✓ main CI · 38133501227
+Triggered via push less than a minute ago
+JOBS
+✓ test (3.12) in 11s (ID 114452502350)
+✓ test (3.11) in 10s (ID 114452502441)
+✓ test (3.13) in 9s (ID 114452502520)

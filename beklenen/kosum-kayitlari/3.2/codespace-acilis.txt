@@ -1,0 +1,10 @@
+$ gh codespace create -R ForenlyAI/github-codespaces-kurs -b main -m basicLinux32gb --idle-timeout 10m --retention-period 1h --display-name kurs-vardiya-codespace --default-permissions
+kurs-vardiya-codespace-7r7gpj594vjhr5xx
+  ✓ Codespaces usage for this repository is paid for by ForenlyAI
+$ gh codespace list --json name,displayName,machineName,state --jq '.[] | select(.name=="kurs-vardiya-codespace-7r7gpj594vjhr5xx") | "\(.displayName) · \(.machineName) · \(.state)"'
+kurs-vardiya-codespace · basicLinux32gb · Available
+$ gh codespace ssh -c kurs-vardiya-codespace-7r7gpj594vjhr5xx -- 'nproc; free -g | head -2; df -h /workspaces | tail -1'
+2
+               total        used        free      shared  buff/cache   available
+Mem:               7           1           0           0           6           6
+/dev/loop4       32G   21G  9.1G  70% /workspaces

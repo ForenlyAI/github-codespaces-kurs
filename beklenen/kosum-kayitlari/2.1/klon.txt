@@ -1,0 +1,11 @@
+$ gh repo clone ForenlyAI/github-codespaces-lab klon
+Cloning into 'klon'...
+$ git -C klon log --oneline -1
+fee9b1c Önbellek klasörleri izlenmesin
+$ git -C lab-depo log --oneline -1
+fee9b1c Önbellek klasörleri izlenmesin
+$ ls klon
+README.md
+gorevler.jsonl
+rapor.py
+test_rapor.py

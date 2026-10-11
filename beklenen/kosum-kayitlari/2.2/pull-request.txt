@@ -1,0 +1,10 @@
+$ gh pr create --base main --head tur-secimi --title "Görev türüne göre rapor" --body-file ../pr-govde.md
+https://github.com/ForenlyAI/github-codespaces-lab/pull/6
+$ gh pr view 6 --json number,state,additions,deletions,changedFiles --jq '"PR #\(.number) · \(.state) · +\(.additions) −\(.deletions) · \(.changedFiles) dosya"'
+PR #6 · OPEN · +11 −1 · 2 dosya
+$ gh api graphql -f query='{repository(owner:"ForenlyAI",name:"github-codespaces-lab"){pullRequest(number:6){closingIssuesReferences(first:5){nodes{number title}}}}}' --jq '.data.repository.pullRequest.closingIssuesReferences.nodes[] | "kapatacağı issue: #\(.number) \(.title)"'
+$ gh pr list
+6	Görev türüne göre rapor	tur-secimi	OPEN	2026-10-11T10:47:47Z
+# ilk sorgu boş döndü; birkaç saniye sonra aynı sorgu:
+$ gh api graphql -f query='{repository(owner:"ForenlyAI",name:"github-codespaces-lab"){pullRequest(number:6){closingIssuesReferences(first:5){nodes{number title}}}}}' --jq '.data.repository.pullRequest.closingIssuesReferences.nodes[] | "kapatacağı issue: #\(.number) \(.title)"'
+kapatacağı issue: #5 Tek görev türünün raporu

@@ -1,0 +1,19 @@
+$ python -m pytest -q -p no:cacheprovider && python rapor.py gorevler.jsonl
+....                                                                     [100%]
+4 passed in 0.01s
+Görev: 22
+Görev süresi toplamı: 103 dk
+Başarı: %80.0
+$ git commit -q -am "Yuvarlama yalnız ekranda; hesap ondalıklı kalır" && git push -q
+$ gh pr checks sure-yuvarla
+test	pass	9s	https://github.com/ForenlyAI/github-codespaces-lab/actions/runs/38133475789/job/114452428928	
+$ gh pr merge sure-yuvarla --squash --delete-branch
+Updating 4ce1025..8ea3039
+Fast-forward
+ rapor.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+From https://github.com/ForenlyAI/github-codespaces-lab
+ * branch            main       -> FETCH_HEAD
+   4ce1025..8ea3039  main       -> origin/main
+$ gh pr view 7 --json state --jq .state
+MERGED
