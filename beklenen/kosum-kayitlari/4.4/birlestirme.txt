@@ -1,0 +1,20 @@
+$ gh pr merge 2 --squash --delete-branch
+Updating b951104..e4fdb7f
+Fast-forward
+ siparis_ozeti/ozet.py | 35 +++++++++++++++++++++++++----------
+ tests/test_ozet.py    | 29 +++++++++++++++++++++++++++++
+ 2 files changed, 54 insertions(+), 10 deletions(-)
+From https://github.com/ForenlyAI/github-codespaces-kurs
+ * branch            main       -> FETCH_HEAD
+   b951104..e4fdb7f  main       -> origin/main
+$ gh pr view 2 --json state,reviews --jq '"PR #2 · \(.state) · inceleme: \(.reviews | length)"'
+PR #2 · MERGED · inceleme: 1
+$ gh issue view 1 --json state --jq '"issue #1 · \(.state)"'
+issue #1 · CLOSED
+$ gh run view 38129294100 -R ForenlyAI/github-codespaces-kurs
+✓ main CI · 38129294100
+Triggered via push less than a minute ago
+JOBS
+✓ test (3.12) in 12s (ID 114440082280)
+✓ test (3.13) in 10s (ID 114440082429)
+✓ test (3.11) in 9s (ID 114440082432)

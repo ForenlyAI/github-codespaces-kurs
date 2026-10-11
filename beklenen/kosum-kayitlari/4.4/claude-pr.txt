@@ -1,0 +1,18 @@
+$ git switch -q main && git pull -q && git switch -c bozuk-satir
+Switched to a new branch 'bozuk-satir'
+$ git diff --stat
+ siparis_ozeti/ozet.py | 35 +++++++++++++++++++++++++----------
+ tests/test_ozet.py    | 29 +++++++++++++++++++++++++++++
+ 2 files changed, 54 insertions(+), 10 deletions(-)
+$ python -m pytest -q -p no:cacheprovider | tail -1 && python -m ruff check . && python -m ruff format --check .
+10 passed in 0.04s
+All checks passed!
+10 files already formatted
+$ git commit -q -am "Bozuk CSV satırını atla ve uyar (#1)" && git push -q -u origin bozuk-satir 2>&1 | tail -1
+remote: 
+$ gh pr create --base main --head bozuk-satir --title "Bozuk CSV satırını atla ve uyar" --body-file ../pr-4.4.md
+https://github.com/ForenlyAI/github-codespaces-kurs/pull/2
+$ gh pr checks bozuk-satir
+test (3.11)	pass	12s	https://github.com/ForenlyAI/github-codespaces-kurs/actions/runs/38129251651/job/114439961359	
+test (3.12)	pass	10s	https://github.com/ForenlyAI/github-codespaces-kurs/actions/runs/38129251651/job/114439961325	
+test (3.13)	pass	9s	https://github.com/ForenlyAI/github-codespaces-kurs/actions/runs/38129251651/job/114439961184	

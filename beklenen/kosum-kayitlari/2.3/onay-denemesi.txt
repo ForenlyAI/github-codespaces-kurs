@@ -1,0 +1,5 @@
+$ gh pr review 2 --approve
+failed to create review: GraphQL: Review Can not approve your own pull request (addPullRequestReview)
+$ gh pr review 2 --comment --body "Okudum: gun() yalnız tarih eşitliğine bakıyor; boş gün için ne yazıyor?"
+$ gh pr view 2 --json reviews --jq '.reviews[] | .state + " · " + .author.login'
+COMMENTED · ForenlyAI

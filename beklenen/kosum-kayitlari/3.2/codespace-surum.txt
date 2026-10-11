@@ -1,0 +1,13 @@
+# gerçek kaydın kesiti: 3.2/codespace.txt
+$ gh codespace ssh -c kurs-lab-codespace-rr7jp56gpj52wwvx -- 'python --version; gh --version | head -1; git --version'
+Python 3.12.15
+gh version 2.102.0 (2026-09-30)
+git version 2.56.0
+$ gh codespace ssh -c kurs-lab-codespace-rr7jp56gpj52wwvx -- 'cd /workspaces/github-codespaces-lab && python -m pytest -q -p no:cacheprovider && ruff check . && python ozet.py siparisler.csv'
+...                                                                      [100%]
+3 passed in 0.01s
+bash: line 1: ruff: command not found
+shell closed: exit status 127
+$ gh codespace delete -c kurs-lab-codespace-rr7jp56gpj52wwvx --force
+$ gh codespace list --json name --jq '[.[] | select(.name=="kurs-lab-codespace-rr7jp56gpj52wwvx")] | length'
+0

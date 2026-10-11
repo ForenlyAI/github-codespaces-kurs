@@ -1,0 +1,4 @@
+$ git switch -q main && git pull -q && git log --oneline -1
+b951104 Kurs deposu: sipariş özeti aracı, devcontainer, CI, şablonlar
+$ gh issue create -R ForenlyAI/github-codespaces-kurs --title "Bozuk CSV satırı programı durduruyor" --body "Adet sütununda sayı olmayan bir satır (ör. on iki) olunca program ValueError ile duruyor. Beklenen: bozuk satır atlansın, kaçıncı satır olduğu uyarı olarak yazılsın, özet kalan satırlarla çıksın."
+https://github.com/ForenlyAI/github-codespaces-kurs/issues/1

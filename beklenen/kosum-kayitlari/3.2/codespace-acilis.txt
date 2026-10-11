@@ -1,0 +1,11 @@
+# gerçek kaydın kesiti: 3.2/codespace.txt
+$ gh codespace create -R ForenlyAI/github-codespaces-lab -b main -m basicLinux32gb --idle-timeout 10m --retention-period 1h --display-name kurs-lab-codespace --default-permissions
+kurs-lab-codespace-rr7jp56gpj52wwvx
+  ✓ Codespaces usage for this repository is paid for by ForenlyAI
+$ gh codespace list --json name,displayName,machineName,state,repository --jq '.[] | select(.name=="kurs-lab-codespace-rr7jp56gpj52wwvx") | "\(.displayName) · \(.machineName) · \(.state) · \(.repository)"'
+kurs-lab-codespace · basicLinux32gb · Available · ForenlyAI/github-codespaces-lab
+$ gh codespace ssh -c kurs-lab-codespace-rr7jp56gpj52wwvx -- 'nproc; free -g | head -2; df -h /workspaces | tail -1'
+2
+               total        used        free      shared  buff/cache   available
+Mem:               7           1           0           0           6           6
+/dev/loop4       32G   21G  9.6G  68% /workspaces

@@ -1,0 +1,6 @@
+$ gh codespace ssh -c kurs-lab-codespace-rr7jp56gpj52wwvx -- 'cd /workspaces/github-codespaces-lab && python ozet.py siparisler.csv > ozet.txt && (nohup python -m http.server 8000 > /dev/null 2>&1 &) && sleep 3 && curl -s localhost:8000/ozet.txt | head -3'
+Satır: 15
+Ara toplam: 12,608.50 TL
+KDV: 1094.80 TL
+$ gh codespace ports -c kurs-lab-codespace-rr7jp56gpj52wwvx
+özet raporu	8000	private	https://kurs-lab-codespace-rr7jp56gpj52wwvx-8000.app.github.dev

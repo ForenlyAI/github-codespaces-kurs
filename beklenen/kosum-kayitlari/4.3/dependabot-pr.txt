@@ -1,0 +1,15 @@
+$ gh pr list -R ForenlyAI/github-codespaces-lab --author app/dependabot
+4	Bump ruff from 0.16.0 to 0.16.10	dependabot/pip/ruff-0.16.10	OPEN	2026-10-11T09:40:34Z
+$ gh pr diff 4 -R ForenlyAI/github-codespaces-lab
+diff --git a/requirements-dev.txt b/requirements-dev.txt
+index 48cef5d..140c138 100644
+--- a/requirements-dev.txt
++++ b/requirements-dev.txt
+@@ -1,2 +1,2 @@
+ pytest==9.1.1
+-ruff==0.16.0
++ruff==0.16.10
+$ gh pr checks 4 -R ForenlyAI/github-codespaces-lab
+test (3.11)	pass	14s	https://github.com/ForenlyAI/github-codespaces-lab/actions/runs/38129219880/job/114439872013	
+test (3.12)	pass	13s	https://github.com/ForenlyAI/github-codespaces-lab/actions/runs/38129219880/job/114439871898	
+test (3.13)	pass	10s	https://github.com/ForenlyAI/github-codespaces-lab/actions/runs/38129219880/job/114439872056	

@@ -20,7 +20,7 @@ Fırın siparişleri ve KDV oranları **ÖRNEK** veridir.
 | `.github/dependabot.yml` | haftalık bağımlılık güncelleme önerisi |
 | `.github/pull_request_template.md` · `ISSUE_TEMPLATE/` | PR ve hata bildirimi şablonları |
 | `alistirmalar/hafta1.py` | Hafta 1 alıştırması: yerel Git geçmişini sıfırdan kurar (internet gerekmez) |
-| `beklenen/` | alıştırmaların ve aracın beklenen çıktıları |
+| `beklenen/` | alıştırmaların ve aracın beklenen çıktıları; `beklenen/kosum-kayitlari/` Hafta 2–4'ün gerçek koşum kayıtları (gh, Codespaces, Actions) |
 | `kontrol.py` | bitirme denetimi (RUBRIK.md ölçütleri) |
 | `RUBRIK.md` | bitirme işinin ölçütleri |
 
@@ -60,6 +60,12 @@ python kontrol.py --hafta1          # çıktınızı beklenen/alistirmalar ile k
 ```
 
 Yazar adı ve commit saatleri sabit olduğu için commit kimlikleri (ör. `c6d9533`) sizde de aynı çıkar.
+
+## Hafta 2–4 kayıtları
+
+Bu haftaların işleri sizin GitHub hesabınızda yapılır, bu yüzden çıktınız birebir aynı olmaz (issue ve PR numaraları,
+koşu kimlikleri, süreler). `beklenen/kosum-kayitlari/<ders>/` altındaki kayıtlar kursu hazırlarken gerçekten koşulan
+komutlardır: aynı komutları kendi deponuzda koşun ve sonucun türünü (geçti / reddedildi / kaldı) karşılaştırın.
 
 ## Bitirme denetimi
 

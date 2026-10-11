@@ -1,0 +1,41 @@
+$ gh codespace create -R ForenlyAI/github-codespaces-kurs -b main -m basicLinux32gb --idle-timeout 10m --retention-period 1h --display-name kurs-ogrenci-codespace --default-permissions
+kurs-ogrenci-codespace-g5xg7vrq74rfjqv
+  ✓ Codespaces usage for this repository is paid for by ForenlyAI
+$ gh codespace list --json name,displayName,machineName,state,repository --jq '.[] | select(.name=="kurs-ogrenci-codespace-g5xg7vrq74rfjqv") | "\(.displayName) · \(.machineName) · \(.state) · \(.repository)"'
+kurs-ogrenci-codespace · basicLinux32gb · Available · ForenlyAI/github-codespaces-kurs
+$ gh codespace ssh -c kurs-ogrenci-codespace-g5xg7vrq74rfjqv -- 'claude --version; which claude; node --version'
+2.1.197 (Claude Code)
+/usr/bin/claude
+v18.20.8
+$ gh codespace ssh -c kurs-ogrenci-codespace-g5xg7vrq74rfjqv -- 'cd /workspaces/github-codespaces-kurs && python -m pytest -q -p no:cacheprovider | tail -1 && python -m ruff check . && python kontrol.py'
+8 passed in 0.02s
+All checks passed!
+YETERLİ  1 · Geliştirme ortamı kod olarak
+YETERLİ  2 · Sürekli bütünleştirme dosyası
+YETERLİ  2 · Testler yerelde geçiyor (8 passed in 0.01s)
+YETERLİ  5 · PR şablonunda yapay zekâ beyanı
+
+4 / 4 ölçüt yeterli
+$ gh codespace ssh -c kurs-ogrenci-codespace-g5xg7vrq74rfjqv -- 'cd /workspaces/github-codespaces-kurs && python -m siparis_ozeti veri/siparisler.csv --tarih 2026-10-06'
+Özet: 2026-10-06
+Satır: 5
+Ara toplam: 3.501,50 TL
+KDV: 289,40 TL
+Genel toplam: 3.790,90 TL
+En çok satan: simit (55 adet)
+$ gh codespace ssh -c kurs-ogrenci-codespace-g5xg7vrq74rfjqv -- '[ -n "$ORNEK_ANAHTAR" ] && echo "ssh kabuğu: ORNEK_ANAHTAR tanımlı" || echo "ssh kabuğu: ORNEK_ANAHTAR yok"'
+ssh kabuğu: ORNEK_ANAHTAR yok
+$ gh codespace ssh -c kurs-ogrenci-codespace-g5xg7vrq74rfjqv -- 'bash -lc "[ -n \"\$ORNEK_ANAHTAR\" ] && echo oturum kabuğu: ORNEK_ANAHTAR tanımlı || echo oturum kabuğu: ORNEK_ANAHTAR yok"'
+oturum kabuğu: ORNEK_ANAHTAR tanımlı
+$ gh codespace ssh -c kurs-ogrenci-codespace-g5xg7vrq74rfjqv -- 'ls -a /workspaces/.codespaces/shared/ | grep -i env; grep -c "^ORNEK_ANAHTAR=" /workspaces/.codespaces/shared/.env-secrets'
+.env
+.env-secrets
+.environmentConfigurationCompleted
+environment-variables.json
+user-secrets-envs.json
+1
+$ gh codespace ssh -c kurs-ogrenci-codespace-g5xg7vrq74rfjqv -- '[ -n "$ANTHROPIC_API_KEY" ] && echo "ANTHROPIC_API_KEY tanımlı" || echo "ANTHROPIC_API_KEY tanımlı değil: claude ilk açılışta giriş ister"'
+ANTHROPIC_API_KEY tanımlı değil: claude ilk açılışta giriş ister
+$ gh codespace delete -c kurs-ogrenci-codespace-g5xg7vrq74rfjqv --force
+$ gh codespace list --json name --jq '[.[] | select(.name=="kurs-ogrenci-codespace-g5xg7vrq74rfjqv")] | length'
+0
