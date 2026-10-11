@@ -1,8 +1,0 @@
-$ gh pr create --base main --head tarih-suzme --title "Tarihe göre özet" --body-file ../pr-govde.md
-https://github.com/ForenlyAI/github-codespaces-lab/pull/2
-$ gh pr view 2 --json number,state,additions,deletions,changedFiles --jq '"PR #\(.number) · \(.state) · +\(.additions) −\(.deletions) · \(.changedFiles) dosya"'
-PR #2 · OPEN · +11 −1 · 2 dosya
-$ gh api graphql -f query='{repository(owner:"ForenlyAI",name:"github-codespaces-lab"){pullRequest(number:2){closingIssuesReferences(first:5){nodes{number title}}}}}' --jq '.data.repository.pullRequest.closingIssuesReferences.nodes[] | "kapatacağı issue: #\(.number) \(.title)"'
-kapatacağı issue: #1 Tek günün özeti
-$ gh pr list
-2	Tarihe göre özet	tarih-suzme	OPEN	2026-10-11T09:19:32Z

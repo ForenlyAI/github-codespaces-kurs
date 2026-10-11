@@ -1,15 +1,15 @@
 $ git status --short
- M siparisler.csv
+ M gorevler.jsonl
 $ git diff --stat
- siparisler.csv | 5 +++++
- 1 file changed, 5 insertions(+)
-$ git add siparisler.csv
-$ git commit -m "7 Ekim siparişleri eklendi"
-[main 2f19c7e] 7 Ekim siparişleri eklendi
- 1 file changed, 5 insertions(+)
+ gorevler.jsonl | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+$ git add gorevler.jsonl
+$ git commit -m "Vardiyanın son 8 görevi eklendi"
+[main 299e616] Vardiyanın son 8 görevi eklendi
+ 1 file changed, 8 insertions(+)
 $ git log --oneline
-2f19c7e 7 Ekim siparişleri eklendi
-c6d9533 Sipariş özeti: ilk sürüm
-$ python ozet.py siparisler.csv
-Satır: 15
-Toplam: 12608.50 TL
+299e616 Vardiyanın son 8 görevi eklendi
+91bdf02 Vardiya raporu: ilk sürüm
+$ python rapor.py gorevler.jsonl
+Görev: 22
+Çalışma süresi: 103.41666666666667 dk

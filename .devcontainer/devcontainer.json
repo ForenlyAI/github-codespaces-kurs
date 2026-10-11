@@ -1,5 +1,5 @@
 {
-  "name": "Sipariş özeti (Python 3.12)",
+  "name": "Vardiya raporu (Python 3.12)",
   "image": "mcr.microsoft.com/devcontainers/python:3.12-bookworm",
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {},
@@ -9,7 +9,7 @@
   "postCreateCommand": "pip install --user -r requirements-dev.txt",
   "forwardPorts": [8000],
   "portsAttributes": {
-    "8000": { "label": "özet raporu", "onAutoForward": "notify" }
+    "8000": { "label": "vardiya raporu", "onAutoForward": "notify" }
   },
   "customizations": {
     "vscode": {

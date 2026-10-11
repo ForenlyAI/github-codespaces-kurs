@@ -1,5 +1,5 @@
 name: Hata bildirimi
-description: Özet yanlış ya da program hata veriyor
+description: Rapor yanlış ya da program hata veriyor
 labels: ["hata"]
 body:
   - type: textarea
@@ -16,7 +16,7 @@ body:
     validations:
       required: true
   - type: input
-    id: tarih
+    id: gorev
     attributes:
-      label: Hangi günün özeti?
-      placeholder: 2026-10-06
+      label: Hangi görev kaydı?
+      placeholder: G011

@@ -1,19 +1,19 @@
-$ git switch -c kdv
-Switched to a new branch 'kdv'
-$ git commit -am "KDV hesabı eklendi"
-[kdv 95d237b] KDV hesabı eklendi
- 1 file changed, 5 insertions(+)
+$ git switch -c basari
+Switched to a new branch 'basari'
+$ git commit -am "Başarı oranı eklendi"
+[basari eea9c11] Başarı oranı eklendi
+ 1 file changed, 6 insertions(+)
 $ git switch main
 Switched to branch 'main'
-$ git merge kdv
-Updating 2f19c7e..95d237b
+$ git merge basari
+Updating 299e616..eea9c11
 Fast-forward
- ozet.py | 5 +++++
- 1 file changed, 5 insertions(+)
+ rapor.py | 6 ++++++
+ 1 file changed, 6 insertions(+)
 $ git branch
-  kdv
+  basari
 * main
-$ python ozet.py siparisler.csv
-Satır: 15
-Toplam: 12608.50 TL
-KDV: 1094.80 TL
+$ python rapor.py gorevler.jsonl
+Görev: 22
+Çalışma süresi: 103.41666666666667 dk
+Başarı: %80.0

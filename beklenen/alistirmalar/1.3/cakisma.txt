@@ -1,23 +1,23 @@
 $ git switch -c bicim
 Switched to a new branch 'bicim'
-$ git commit -am "Toplamda binlik ayırıcı"
-[bicim 64484b4] Toplamda binlik ayırıcı
+$ git commit -am "Süreyi tek ondalıkla yaz"
+[bicim e4dc53e] Süreyi tek ondalıkla yaz
  1 file changed, 1 insertion(+), 1 deletion(-)
 $ git switch main
 Switched to branch 'main'
-$ git commit -am "Toplam satırının adı: ara toplam"
-[main 7c83e30] Toplam satırının adı: ara toplam
+$ git commit -am "Süre satırının adı: görev süresi toplamı"
+[main cadca6a] Süre satırının adı: görev süresi toplamı
  1 file changed, 1 insertion(+), 1 deletion(-)
 $ git merge bicim
-Auto-merging ozet.py
-CONFLICT (content): Merge conflict in ozet.py
+Auto-merging rapor.py
+CONFLICT (content): Merge conflict in rapor.py
 Automatic merge failed; fix conflicts and then commit the result.
 $ git status --short
-UU ozet.py
+UU rapor.py
 ?? __pycache__/
-$ grep -n -A4 '<<<<<<<' ozet.py
-23:<<<<<<< HEAD
-24-    print(f"Ara toplam: {toplam(satirlar)} TL")
-25-=======
-26-    print(f"Toplam: {toplam(satirlar):,.2f} TL")
-27->>>>>>> bicim
+$ grep -n -A4 '<<<<<<<' rapor.py
+29:<<<<<<< HEAD
+30-    print(f"Görev süresi toplamı: {toplam_sure(gorevler)} dk")
+31-=======
+32-    print(f"Çalışma süresi: {toplam_sure(gorevler):.1f} dk")
+33->>>>>>> bicim

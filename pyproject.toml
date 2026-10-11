@@ -1,7 +1,7 @@
 [project]
-name = "siparis-ozeti"
+name = "vardiya-raporu"
 version = "0.1.0"
-description = "Küçük bir fırının günlük sipariş özeti (Forenly AI Academy · GitHub ve Codespaces kursu)"
+description = "Kafede çalışan insansı robotun vardiya raporu (Forenly AI Academy · GitHub ve Codespaces kursu)"
 requires-python = ">=3.11"
 
 [tool.pytest.ini_options]
