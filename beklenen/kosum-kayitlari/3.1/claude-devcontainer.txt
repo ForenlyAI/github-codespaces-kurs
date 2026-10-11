@@ -1,0 +1,13 @@
+$ claude -p "Bu proje için Codespaces devcontainer.json yaz: Python 3.12 bookworm, gh, sshd, ..."
+`.devcontainer/devcontainer.json` dosyasını yazdım; resmi `mcr.microsoft.com/devcontainers/python:1-3.12-bookworm` imajını, GitHub CLI ve `gh codespace ssh` için `sshd` özelliklerini kullanıyor. Ortam kurulunca `postCreateCommand` ile `requirements-dev.txt` içindeki pytest ve ruff kuruluyor, 8000 numaralı port da yönlendiriliyor. `python -m json.tool` dosyayı hatasız okudu; başka dosyaya dokunmadım ve bu adımları Codespaces'te çalıştırıp denemedim.
+# Claude Code 2.1.289 · 3 adım · 9,4 sn
+# doğrulama: dosyayı biz okuyoruz
+$ python -m json.tool .devcontainer/devcontainer.json > /dev/null && echo 'JSON geçerli'
+JSON geçerli
+$ python -c "import json; d=json.load(open('.devcontainer/devcontainer.json')); print('imaj:', d.get('image')); print('özellikler:', ', '.join(x.split('/')[-1] for x in d.get('features', {}))); print('kurulum:', d.get('postCreateCommand')); print('port:', d.get('forwardPorts'))"
+imaj: mcr.microsoft.com/devcontainers/python:1-3.12-bookworm
+özellikler: github-cli:1, sshd:1
+kurulum: pip install --user -r requirements-dev.txt
+port: [8000]
+$ git status --short
+?? .devcontainer/

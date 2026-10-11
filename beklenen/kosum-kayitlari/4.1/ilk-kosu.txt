@@ -1,0 +1,19 @@
+$ gh run view 38133421419 -R ForenlyAI/github-codespaces-lab --verbose
+
+✓ main CI · 38133421419
+Triggered via push less than a minute ago
+
+JOBS
+✓ test in 10s (ID 114452268774)
+  ✓ Set up job
+  ✓ Run actions/checkout@v7
+  ✓ Run actions/setup-python@v7
+  ✓ Bağımlılıklar
+  ✓ Kod denetimi
+  ✓ Testler
+  ✓ Post Run actions/setup-python@v7
+  ✓ Post Run actions/checkout@v7
+  ✓ Complete job
+
+
+

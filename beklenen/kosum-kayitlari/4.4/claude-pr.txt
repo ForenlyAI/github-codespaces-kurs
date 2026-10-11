@@ -1,0 +1,24 @@
+$ git switch -q main && git pull -q && git switch -c bozuk-satir
+Switched to a new branch 'bozuk-satir'
+$ git diff --stat
+ tests/test_rapor.py     | 18 ++++++++++++++++++
+ vardiya_raporu/rapor.py | 19 +++++++++++++------
+ 2 files changed, 31 insertions(+), 6 deletions(-)
+$ python -m pytest -q -p no:cacheprovider | tail -1 && python -m ruff check . && python -m ruff format --check .
+10 passed in 0.02s
+All checks passed!
+10 files already formatted
+$ git commit -q -am "Bozuk kayıt satırını atla ve uyar (#6)" && git push -q -u origin bozuk-satir
+remote: 
+remote: Create a pull request for 'bozuk-satir' on GitHub by visiting:        
+remote:      https://github.com/ForenlyAI/github-codespaces-kurs/pull/new/bozuk-satir        
+remote: 
+$ gh pr create --base main --head bozuk-satir --title "Bozuk kayıt satırını atla ve uyar" --body-file ../pr-4.4.md
+https://github.com/ForenlyAI/github-codespaces-kurs/pull/7
+$ gh pr checks bozuk-satir
+no checks reported on the 'bozuk-satir' branch
+# koşu başladıktan sonra aynı komut:
+$ gh pr checks bozuk-satir
+test (3.11)	pass	7s	https://github.com/ForenlyAI/github-codespaces-kurs/actions/runs/38134080559/job/114454251406	
+test (3.12)	pass	8s	https://github.com/ForenlyAI/github-codespaces-kurs/actions/runs/38134080559/job/114454251605	
+test (3.13)	pass	11s	https://github.com/ForenlyAI/github-codespaces-kurs/actions/runs/38134080559/job/114454251597	

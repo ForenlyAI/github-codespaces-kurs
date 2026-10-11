@@ -1,0 +1,19 @@
+$ git switch -q main
+$ gh pr checks 7
+test (3.11)	pass	7s	https://github.com/ForenlyAI/github-codespaces-kurs/actions/runs/38134080559/job/114454251406	
+test (3.12)	pass	8s	https://github.com/ForenlyAI/github-codespaces-kurs/actions/runs/38134080559/job/114454251605	
+test (3.13)	pass	11s	https://github.com/ForenlyAI/github-codespaces-kurs/actions/runs/38134080559/job/114454251597	
+$ gh pr merge 7 --squash --delete-branch
+$ gh pr view 7 --json state,reviews --jq '"PR #7 · \(.state) · inceleme: \(.reviews | length)"'
+PR #7 · MERGED · inceleme: 1
+$ gh issue view 6 --json state --jq '"issue #6 · \(.state)"'
+issue #6 · CLOSED
+$ git log --oneline -1
+b3ad72d Bozuk kayıt satırını atla ve uyar (#6) (#7)
+$ gh run view 38134117697 -R ForenlyAI/github-codespaces-kurs
+✓ main CI · 38134117697
+Triggered via push less than a minute ago
+JOBS
+✓ test (3.13) in 8s (ID 114454362759)
+✓ test (3.11) in 10s (ID 114454362822)
+✓ test (3.12) in 8s (ID 114454362828)

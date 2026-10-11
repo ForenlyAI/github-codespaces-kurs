@@ -1,0 +1,22 @@
+$ gh issue create -R ForenlyAI/github-codespaces-lab --title "Tek görev türünün raporu" --body "Vardiya sorumlusu yalnız servis görevlerini görmek istiyor: görev türü seçilebilsin."
+https://github.com/ForenlyAI/github-codespaces-lab/issues/5
+$ git switch -c tur-secimi
+Switched to a new branch 'tur-secimi'
+$ python -m pytest -q -p no:cacheprovider
+...                                                                      [100%]
+3 passed in 0.01s
+$ python rapor.py gorevler.jsonl servis
+Görev: 15
+Görev süresi toplamı: 30.1 dk
+Başarı: %80.0
+$ git commit -am "Görev türüne göre rapor (#5)"
+[tur-secimi 4bd444d] Görev türüne göre rapor (#5)
+ 2 files changed, 11 insertions(+), 1 deletion(-)
+$ git push -u origin tur-secimi
+branch 'tur-secimi' set up to track 'origin/tur-secimi'.
+remote: 
+remote: Create a pull request for 'tur-secimi' on GitHub by visiting:        
+remote:      https://github.com/ForenlyAI/github-codespaces-lab/pull/new/tur-secimi        
+remote: 
+To https://github.com/ForenlyAI/github-codespaces-lab.git
+ * [new branch]      tur-secimi -> tur-secimi

@@ -1,0 +1,18 @@
+$ git log --oneline | wc -l
+12
+$ gh repo view ForenlyAI/github-codespaces-lab --json visibility --jq .visibility
+PRIVATE
+$ git remote add origin https://github.com/ForenlyAI/github-codespaces-lab.git
+$ git push -u origin main
+branch 'main' set up to track 'origin/main'.
+remote: 
+remote: Create a pull request for 'main' on GitHub by visiting:        
+remote:      https://github.com/ForenlyAI/github-codespaces-lab/pull/new/main        
+remote: 
+To https://github.com/ForenlyAI/github-codespaces-lab.git
+ * [new branch]      main -> main
+$ git remote -v
+origin	https://github.com/ForenlyAI/github-codespaces-lab.git (fetch)
+origin	https://github.com/ForenlyAI/github-codespaces-lab.git (push)
+$ git status -sb
+## main...origin/main

@@ -1,0 +1,6 @@
+$ gh codespace ssh -c kurs-vardiya-codespace-7r7gpj594vjhr5xx -- 'cd /workspaces/github-codespaces-kurs && python -m vardiya_raporu veri/gorevler.jsonl > rapor.txt && (nohup python -m http.server 8000 > /dev/null 2>&1 &) && sleep 3 && curl -s localhost:8000/rapor.txt | head -3'
+Vardiya raporu: bütün görevler
+Görev: 22 (iş görevi 20)
+Başarı: %80,0 (16 / 20)
+$ gh codespace ports -c kurs-vardiya-codespace-7r7gpj594vjhr5xx
+vardiya raporu	8000	private	https://kurs-vardiya-codespace-7r7gpj594vjhr5xx-8000.app.github.dev

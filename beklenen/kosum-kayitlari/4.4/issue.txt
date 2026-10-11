@@ -1,0 +1,4 @@
+$ git switch -q main && git pull -q && git log --oneline -1
+6dec146 Yürüyen örnek: kafedeki insansı robotun vardiya raporu (#5)
+$ gh issue create -R ForenlyAI/github-codespaces-kurs --title "Bozuk kayıt satırı raporu durduruyor" --body "Robotun kaydında yarım yazılmış bir satır (ör. elektrik kesintisinde) olunca program JSONDecodeError ile duruyor. Beklenen: bozuk satır atlansın, kaçıncı satır olduğu uyarı olarak yazılsın, rapor kalan görevlerle çıksın."
+https://github.com/ForenlyAI/github-codespaces-kurs/issues/6

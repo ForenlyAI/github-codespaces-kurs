@@ -1,0 +1,23 @@
+# Claude Code'un 1. ve 2. bulgusunu kendi verdiği komutlarla deniyoruz
+$ python3 rapor.py gorevler.jsonl sarj 2>&1 | tail -1
+ZeroDivisionError: division by zero
+$ python3 rapor.py gorevler.jsonl Servis 2>&1 | tail -1
+ZeroDivisionError: division by zero
+# düzeltmeden sonra
+$ python3 rapor.py gorevler.jsonl sarj
+Görev: 2
+Görev süresi toplamı: 53.0 dk
+Başarı: %0.0
+$ python3 rapor.py gorevler.jsonl Servis
+Bu türde görev yok: Servis (servis, toplama, sarj)
+$ python -m pytest -q -p no:cacheprovider
+....                                                                     [100%]
+4 passed in 0.01s
+$ git commit -am "Şarj ve olmayan türde çökme yok, README'de tür kullanımı"
+[tur-secimi 33e826c] Şarj ve olmayan türde çökme yok, README'de tür kullanımı
+ 3 files changed, 9 insertions(+), 1 deletion(-)
+$ git push
+To https://github.com/ForenlyAI/github-codespaces-lab.git
+   4bd444d..33e826c  tur-secimi -> tur-secimi
+$ gh pr comment 6 --body-file ../claude-yorum.md
+https://github.com/ForenlyAI/github-codespaces-lab/pull/6#issuecomment-6108238417

@@ -1,0 +1,19 @@
+$ gh codespace ssh -c kurs-vardiya-codespace-7r7gpj594vjhr5xx -- 'python --version; gh --version | head -1; git --version'
+Python 3.12.15
+gh version 2.102.0 (2026-09-30)
+git version 2.56.0
+$ gh codespace ssh -c kurs-vardiya-codespace-7r7gpj594vjhr5xx -- 'cd /workspaces/github-codespaces-kurs && python -m pytest -q -p no:cacheprovider | tail -1'
+8 passed in 0.02s
+$ gh codespace ssh -c kurs-vardiya-codespace-7r7gpj594vjhr5xx -- 'cd /workspaces/github-codespaces-kurs && ruff check .'
+bash: line 1: ruff: command not found
+shell closed: exit status 127
+$ gh codespace ssh -c kurs-vardiya-codespace-7r7gpj594vjhr5xx -- 'cd /workspaces/github-codespaces-kurs && python -m ruff check .'
+All checks passed!
+$ gh codespace ssh -c kurs-vardiya-codespace-7r7gpj594vjhr5xx -- 'cd /workspaces/github-codespaces-kurs && python -m vardiya_raporu veri/gorevler.jsonl'
+Vardiya raporu: bütün görevler
+Görev: 22 (iş görevi 20)
+Başarı: %80,0 (16 / 20)
+Ortalama süre: 151,2 sn
+En uzun görev: G015 (262,0 sn)
+Hatalar: E21-bardak-kaydi × 2, E07-yol-kapali × 2
+Şarj payı: %51,2

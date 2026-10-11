@@ -1,0 +1,12 @@
+$ gh codespace ssh -c kurs-vardiya-codespace-7r7gpj594vjhr5xx -- 'claude --version; which claude; node --version'
+2.1.197 (Claude Code)
+/usr/bin/claude
+v18.20.8
+$ gh codespace ssh -c kurs-vardiya-codespace-7r7gpj594vjhr5xx -- 'cd /workspaces/github-codespaces-kurs && python kontrol.py | tail -2'
+
+4 / 4 ölçüt yeterli
+$ gh codespace ssh -c kurs-vardiya-codespace-7r7gpj594vjhr5xx -- '[ -n "$ANTHROPIC_API_KEY" ] && echo "ANTHROPIC_API_KEY tanımlı" || echo "ANTHROPIC_API_KEY tanımlı değil: claude ilk açılışta giriş ister"'
+ANTHROPIC_API_KEY tanımlı değil: claude ilk açılışta giriş ister
+$ gh codespace delete -c kurs-vardiya-codespace-7r7gpj594vjhr5xx --force
+$ gh codespace list --json name --jq '[.[] | select(.name=="kurs-vardiya-codespace-7r7gpj594vjhr5xx")] | length'
+0

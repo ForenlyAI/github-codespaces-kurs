@@ -1,0 +1,25 @@
+$ git switch -q bozuk-satir && git log --oneline -1
+a7b72c7 Bozuk kayıt satırını atla ve uyar (#6)
+$ gh pr diff 7 --name-only
+tests/test_rapor.py
+vardiya_raporu/rapor.py
+$ sed -n 5p ../bozuk.jsonl
+{"gorev_id": "G005", "baslangic": "2026-10-07T08:13:40", "bitis": "2026-10-07T
+$ python -m vardiya_raporu ../bozuk.jsonl
+Vardiya raporu: bütün görevler
+Görev: 21 (iş görevi 19)
+Başarı: %84,2 (16 / 19)
+Ortalama süre: 152,2 sn
+En uzun görev: G015 (262,0 sn)
+Hatalar: E07-yol-kapali × 2, E21-bardak-kaydi × 1
+Şarj payı: %52,4
+Uyarı: 5. satır bozuk, atlandı
+$ python -m vardiya_raporu veri/gorevler.jsonl | diff - beklenen/rapor-butun-gorevler.txt && echo 'eski çıktıyla aynı'
+eski çıktıyla aynı
+$ python -m vardiya_raporu ../hepsi-bozuk.jsonl
+Uyarı: 1. satır bozuk, atlandı
+Uyarı: 2. satır bozuk, atlandı
+Bu türde görev yok: None
+$ gh issue create -R ForenlyAI/github-codespaces-kurs --title "Bütün satırlar bozuksa ileti yanıltıcı" --body "PR #7 incelemesinde bulundu: bütün satırlar bozukken ve tür verilmemişken program \"Bu türde görev yok: None\" yazıyor."
+https://github.com/ForenlyAI/github-codespaces-kurs/issues/8
+$ gh pr review 7 --comment --body "Doğrulandı: 5. satırı yarım dosyada uyarı ve 21 görevlik rapor doğru; bozulmamış veride çıktı beklenen/ ile aynı; CI üç sürümde yeşil. Claude Code'un kendi bildirdiği kapsam dışı durum için 8 numaralı issue açıldı."

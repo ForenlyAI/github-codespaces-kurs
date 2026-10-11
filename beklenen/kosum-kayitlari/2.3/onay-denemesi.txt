@@ -1,0 +1,5 @@
+$ gh pr review 6 --approve
+failed to create review: GraphQL: Review Can not approve your own pull request (addPullRequestReview)
+$ gh pr review 6 --comment --body "Okudum: sec() yalnız tür eşitliğine bakıyor; olmayan bir tür için ne yazıyor?"
+$ gh pr view 6 --json reviews --jq '.reviews[] | .state + " · " + .author.login'
+COMMENTED · ForenlyAI
