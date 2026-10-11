@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Hafta 1 · Git Temelleri — Ders 1.1–1.4. Yalnız yerel git; internet ve GitHub hesabı gerekmez.
 
-  python hafta1.py                 → alistirmalar/calisma/siparis-ozeti (sıfırdan), alistirmalar/cikti/1.x/*.txt
+  python hafta1.py                 → alistirmalar/calisma/vardiya-raporu (sıfırdan), alistirmalar/cikti/1.x/*.txt
   python hafta1.py --cakismada-dur → Ders 1.3'teki çakışmada durur (Claude Code denemesi için aynı durum)
 
 Yazar ve commit saatleri sabit (ortak.YEREL_KIMLIK): commit kimlikleri her makinede aynı çıkar.
-Fırın siparişleri ve KDV oranları ÖRNEKTİR."""
+Robot görev kaydı (kafede çay servisi yapan insansı robot, bir vardiya) ÖRNEKTİR."""
 
 import datetime
 import pathlib
@@ -14,132 +14,132 @@ import sys
 
 from ortak import CALISMA, YEREL_KIMLIK, Oturum, dosya, kayit
 
-DEPO = CALISMA / "siparis-ozeti"
-BASLA = datetime.datetime(2026, 10, 5, 9, 0, tzinfo=datetime.timezone(datetime.timedelta(hours=3)))
+DEPO = CALISMA / "vardiya-raporu"
+BASLA = datetime.datetime(2026, 10, 7, 11, 0, tzinfo=datetime.timezone(datetime.timedelta(hours=3)))
 VERI = (
-    (pathlib.Path(__file__).resolve().parents[1] / "veri" / "siparisler.csv")
+    (pathlib.Path(__file__).resolve().parents[1] / "veri" / "gorevler.jsonl")
     .read_text(encoding="utf-8")
     .splitlines()
 )
+ILK = 14  # ilk commit'teki görev sayısı; kalan satırlar ikinci commit'te gelir
 
-OZET_V1 = '''"""Fırın sipariş özeti (ÖRNEK veri)."""
-import csv
+RAPOR_V1 = '''"""Robot vardiya raporu (ÖRNEK veri)."""
+import json
 import sys
-from decimal import Decimal
+from datetime import datetime
 
 
 def oku(yol):
     with open(yol, encoding="utf-8") as f:
-        return list(csv.DictReader(f))
+        return [json.loads(s) for s in f if s.strip()]
 
 
-def toplam(satirlar):
-    return sum(int(s["adet"]) * Decimal(s["birim_fiyat"]) for s in satirlar)
+def sure_dk(g):
+    fark = datetime.fromisoformat(g["bitis"]) - datetime.fromisoformat(g["baslangic"])
+    return fark.total_seconds() / 60
+
+
+def toplam_sure(gorevler):
+    return sum(sure_dk(g) for g in gorevler)
 
 
 if __name__ == "__main__":
-    satirlar = oku(sys.argv[1])
-    print(f"Satır: {len(satirlar)}")
-    print(f"Toplam: {toplam(satirlar)} TL")
+    gorevler = oku(sys.argv[1])
+    print(f"Görev: {len(gorevler)}")
+    print(f"Çalışma süresi: {toplam_sure(gorevler)} dk")
 '''
-KDV_FONK = """
+BASARI_FONK = """
 
-def kdv(satirlar):
-    return sum(int(s["adet"]) * Decimal(s["birim_fiyat"]) * Decimal(s["kdv_orani"]) / 100 for s in satirlar)
+def basari(gorevler):
+    isler = [g for g in gorevler if g["tur"] != "sarj"]
+    return 100 * sum(g["sonuc"] == "tamam" for g in isler) / len(isler)
 """
-TEST = """from decimal import Decimal
-
-from ozet import kdv, oku, toplam
+TEST = """from rapor import basari, oku, toplam_sure
 
 
-def test_toplam():
-    assert toplam(oku("siparisler.csv")) == Decimal("12608.50")
+def test_toplam_sure():
+    assert round(toplam_sure(oku("gorevler.jsonl")), 1) == 103.4
 
 
-def test_kdv():
-    assert round(kdv(oku("siparisler.csv")), 2) == Decimal("1094.80")
+def test_basari():
+    assert round(basari(oku("gorevler.jsonl")), 1) == 80.0
 """
-README_V1 = (
-    "# Sipariş özeti\n\nKüçük bir fırının günlük siparişlerinden toplam tutarı hesaplar (ÖRNEK veri).\n"
-)
-README_V2 = README_V1 + "\nKullanım: `python ozet.py siparisler.csv`\n"
+README_V1 = "# Vardiya raporu\n\nKafede çay servisi yapan insansı robotun görev kaydından vardiya raporu çıkarır (ÖRNEK veri).\n"
+README_V2 = README_V1 + "\nKullanım: `python rapor.py gorevler.jsonl`\n"
 GITIGNORE = "__pycache__/\n.pytest_cache/\n.venv/\n"
-TOPLAM_SATIRI = '    print(f"Toplam: {toplam(satirlar)} TL")\n'
+SURE_SATIRI = '    print(f"Çalışma süresi: {toplam_sure(gorevler)} dk")\n'
+CALISTIR = "python rapor.py gorevler.jsonl"
 
 
-def oku_ozet():
-    return (DEPO / "ozet.py").read_text(encoding="utf-8")
+def oku_rapor():
+    return (DEPO / "rapor.py").read_text(encoding="utf-8")
 
 
 def degistir(eski, yeni):
-    s = oku_ozet()
+    s = oku_rapor()
     assert eski in s, eski
-    dosya(DEPO, "ozet.py", s.replace(eski, yeni))
+    dosya(DEPO, "rapor.py", s.replace(eski, yeni))
 
 
 def main(cakismada_dur=False):
     if DEPO.exists():
         shutil.rmtree(DEPO)
     DEPO.mkdir(parents=True)
-    saat = BASLA
 
     # ---------- Ders 1.1 · Depo ve Commit ----------
-    o = Oturum("1.1", "ilk-commit", DEPO, YEREL_KIMLIK, saat)
+    o = Oturum("1.1", "ilk-commit", DEPO, YEREL_KIMLIK, BASLA)
     dosya(DEPO, "README.md", README_V1)
-    dosya(DEPO, "ozet.py", OZET_V1)
-    dosya(DEPO, "siparisler.csv", "\n".join(VERI[:11]) + "\n")
+    dosya(DEPO, "rapor.py", RAPOR_V1)
+    dosya(DEPO, "gorevler.jsonl", "\n".join(VERI[:ILK]) + "\n")
     o.k("git init -b main")
     o.k("git status --short")
-    o.k("git add README.md ozet.py siparisler.csv")
+    o.k("git add README.md rapor.py gorevler.jsonl")
     o.k("git status --short")
-    out = o.k('git commit -m "Sipariş özeti: ilk sürüm"')
+    out = o.k('git commit -m "Vardiya raporu: ilk sürüm"')
     o.k("git log --oneline")
-    o.k("python ozet.py siparisler.csv")
+    o.k(CALISTIR)
     o.yaz()
-    ilk_hash = o.k("git rev-parse --short HEAD", goster=False)
+    ilk = o.k(CALISTIR, goster=False).splitlines()
     kayit(
         d1_1_git_surum=o.k("git --version", goster=False).split()[-1],
         d1_1_izsiz=3,
         d1_1_ilk_commit_dosya=int(out.split(" file")[0].split()[-1]),
         d1_1_ilk_commit_satir=int(out.split("insertions")[0].split()[-1]),
-        d1_1_ilk_hash=ilk_hash,
-        d1_1_ilk_satir=10,
-        d1_1_ilk_toplam=o.k("python ozet.py siparisler.csv", goster=False).splitlines()[1],
+        d1_1_ilk_hash=o.k("git rev-parse --short HEAD", goster=False),
+        d1_1_ilk_gorev=ilk[0],
+        d1_1_ilk_sure=ilk[1],
     )
 
     o2 = Oturum("1.1", "ikinci-commit", DEPO, YEREL_KIMLIK, o.saat)
-    dosya(DEPO, "siparisler.csv", "\n".join(VERI) + "\n")
+    dosya(DEPO, "gorevler.jsonl", "\n".join(VERI) + "\n")
     o2.k("git status --short")
     o2.k("git diff --stat")
-    o2.k("git add siparisler.csv")
-    o2.k('git commit -m "7 Ekim siparişleri eklendi"')
+    o2.k("git add gorevler.jsonl")
+    o2.k(f'git commit -m "Vardiyanın son {len(VERI) - ILK} görevi eklendi"')
     o2.k("git log --oneline")
-    o2.k("python ozet.py siparisler.csv")
+    o2.k(CALISTIR)
     o2.yaz()
-    kayit(
-        d1_1_ikinci_ekleme=5,
-        d1_1_commit=2,
-        d1_1_son_toplam=o2.k("python ozet.py siparisler.csv", goster=False).splitlines()[1],
-    )
+    son = o2.k(CALISTIR, goster=False).splitlines()
+    kayit(d1_1_ikinci_ekleme=len(VERI) - ILK, d1_1_commit=2, d1_1_son_gorev=son[0], d1_1_son_sure=son[1])
 
     # ---------- Ders 1.2 · Dal ve Birleştirme ----------
     o = Oturum("1.2", "hizli-ileri", DEPO, YEREL_KIMLIK, o2.saat)
-    o.k("git switch -c kdv")
-    dosya(DEPO, "ozet.py", oku_ozet().replace("\n\nif __name__", KDV_FONK + "\n\nif __name__"))
-    degistir(TOPLAM_SATIRI, TOPLAM_SATIRI + '    print(f"KDV: {kdv(satirlar):.2f} TL")\n')
-    o.k('git commit -am "KDV hesabı eklendi"')
+    o.k("git switch -c basari")
+    dosya(DEPO, "rapor.py", oku_rapor().replace("\n\nif __name__", BASARI_FONK + "\n\nif __name__"))
+    degistir(SURE_SATIRI, SURE_SATIRI + '    print(f"Başarı: %{basari(gorevler):.1f}")\n')
+    o.k('git commit -am "Başarı oranı eklendi"')
     o.k("git switch main")
-    o.k("git merge kdv")
+    o.k("git merge basari")
     o.k("git branch")
-    o.k("python ozet.py siparisler.csv")
+    o.k(CALISTIR)
     o.yaz()
-    kayit(d1_2_kdv=o.k("python ozet.py siparisler.csv", goster=False).splitlines()[2])
+    kayit(d1_2_basari=o.k(CALISTIR, goster=False).splitlines()[2])
 
     o2 = Oturum("1.2", "birlestirme-commit", DEPO, YEREL_KIMLIK, o.saat)
     o2.k("git switch -c test-ekle")
-    dosya(DEPO, "test_ozet.py", TEST)
-    o2.k("git add test_ozet.py")
-    o2.k('git commit -m "Toplam ve KDV için test"')
+    dosya(DEPO, "test_rapor.py", TEST)
+    o2.k("git add test_rapor.py")
+    o2.k('git commit -m "Süre ve başarı için test"')
     o2.k("git switch main")
     dosya(DEPO, "README.md", README_V2)
     o2.k('git commit -am "README: kullanım satırı"')
@@ -156,16 +156,16 @@ def main(cakismada_dur=False):
     # ---------- Ders 1.3 · Çakışma Çözme ----------
     o = Oturum("1.3", "cakisma", DEPO, YEREL_KIMLIK, o2.saat)
     o.k("git switch -c bicim")
-    degistir(TOPLAM_SATIRI, '    print(f"Toplam: {toplam(satirlar):,.2f} TL")\n')
-    o.k('git commit -am "Toplamda binlik ayırıcı"')
+    degistir(SURE_SATIRI, '    print(f"Çalışma süresi: {toplam_sure(gorevler):.1f} dk")\n')
+    o.k('git commit -am "Süreyi tek ondalıkla yaz"')
     o.k("git switch main")
-    degistir(TOPLAM_SATIRI, '    print(f"Ara toplam: {toplam(satirlar)} TL")\n')
-    o.k('git commit -am "Toplam satırının adı: ara toplam"')
+    degistir(SURE_SATIRI, '    print(f"Görev süresi toplamı: {toplam_sure(gorevler)} dk")\n')
+    o.k('git commit -am "Süre satırının adı: görev süresi toplamı"')
     o.k("git merge bicim", beklenen_kod=1)
     o.k("git status --short")
-    o.k("grep -n -A4 '<<<<<<<' ozet.py")
+    o.k("grep -n -A4 '<<<<<<<' rapor.py")
     o.yaz()
-    s = oku_ozet()
+    s = oku_rapor()
     kayit(
         d1_3_cakisan_dosya=1,
         d1_3_isaret=sum(s.count(m) for m in ("<<<<<<<", "=======", ">>>>>>>")),
@@ -176,35 +176,36 @@ def main(cakismada_dur=False):
         return
 
     o2 = Oturum("1.3", "cozum", DEPO, YEREL_KIMLIK, o.saat)
-    bas, son = s.index("<<<<<<<"), s.index(">>>>>>>")
-    son = s.index("\n", son) + 1
-    dosya(DEPO, "ozet.py", s[:bas] + '    print(f"Ara toplam: {toplam(satirlar):,.2f} TL")\n' + s[son:])
-    o2.k("grep -c -E '^(<<<<<<<|=======|>>>>>>>)' ozet.py", beklenen_kod=1)
+    bas, bit = s.index("<<<<<<<"), s.index(">>>>>>>")
+    bit = s.index("\n", bit) + 1
+    dosya(
+        DEPO,
+        "rapor.py",
+        s[:bas] + '    print(f"Görev süresi toplamı: {toplam_sure(gorevler):.1f} dk")\n' + s[bit:],
+    )
+    o2.k("grep -c -E '^(<<<<<<<|=======|>>>>>>>)' rapor.py", beklenen_kod=1)
     o2.k("git diff --check")
     o2.k("python -m pytest -q -p no:cacheprovider")
-    o2.k("python ozet.py siparisler.csv")
-    o2.k("git add ozet.py")
+    o2.k(CALISTIR)
+    o2.k("git add rapor.py")
     o2.k("git commit --no-edit")
     o2.k("git log --oneline --graph -6")
     o2.yaz()
-    kayit(d1_3_cozum_satiri=o2.k("python ozet.py siparisler.csv", goster=False).splitlines()[1])
+    kayit(d1_3_isaret_sonra=0, d1_3_cozum_satiri=o2.k(CALISTIR, goster=False).splitlines()[1])
 
     # ---------- Ders 1.4 · Geçmiş ve Geri Alma ----------
     o = Oturum("1.4", "geri-alma", DEPO, YEREL_KIMLIK, o2.saat)
-    degistir("/ 100 for s", "/ 10 for s")
-    o.k('git commit -am "KDV hesabını sadeleştir"')
+    degistir('    isler = [g for g in gorevler if g["tur"] != "sarj"]\n', "    isler = gorevler\n")
+    o.k('git commit -am "Başarı hesabını sadeleştir"')
     o.k("python -m pytest -q -p no:cacheprovider --tb=no -rf", beklenen_kod=1)
-    kotu_kdv = o.k("python ozet.py siparisler.csv", goster=False).splitlines()[2]
+    kotu = o.k(CALISTIR, goster=False).splitlines()[2]
     o.k("git log --oneline -3")
     o.k("git show --stat --format='%h %s' HEAD")
     o.k("git revert --no-edit HEAD", gizle=r"^ Date:")
     o.k("python -m pytest -q -p no:cacheprovider")
     o.k("git log --oneline -3")
     o.yaz()
-    kayit(
-        d1_4_kotu_kdv=kotu_kdv,
-        d1_4_dogru_kdv=o.k("python ozet.py siparisler.csv", goster=False).splitlines()[2],
-    )
+    kayit(d1_4_kotu_basari=kotu, d1_4_dogru_basari=o.k(CALISTIR, goster=False).splitlines()[2])
 
     o2 = Oturum("1.4", "gitignore", DEPO, YEREL_KIMLIK, o.saat)
     o2.k("python -m pytest -q", goster=False)  # önbellek klasörleri oluşur

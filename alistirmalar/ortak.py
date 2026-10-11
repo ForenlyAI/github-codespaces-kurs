@@ -5,7 +5,7 @@ Derslerdeki her komut çıktısı burada GERÇEKTEN koşulan git / gh komutları
   kayit(anahtar=değer)      : ölçümü OLCUMLER.json'a yazar (derslerdeki bütün sayılar buradan gelir)
 Yerel alıştırmalarda (Hafta 1) yazar adı, e-posta ve commit saatleri sabittir; bu yüzden commit kimlikleri
 (hash) her makinede aynı çıkar ve öğrenci kendi koşumunu beklenen/ klasörüyle birebir karşılaştırabilir.
-Örnek işletme verisi (fırın siparişleri, KDV oranları) ÖRNEKTİR.
+Örnek veri (kafede çay servisi yapan insansı robotun görev kaydı) ÖRNEKTİR.
 """
 
 import datetime
@@ -61,7 +61,7 @@ def olcum(anahtar):
 def temizle(metin, klasor=None):
     """Çıktıdan makineye özgü yolları çıkarır (ev klasörü, çalışma klasörü)."""
     if klasor:
-        metin = metin.replace(str(klasor), "siparis-ozeti")
+        metin = metin.replace(str(klasor), "vardiya-raporu")
     metin = metin.replace(str(LAB), "lab").replace(str(pathlib.Path.home()), "~")
     metin = re.sub(r"\x1b\[[0-9;]*[A-Za-z]", "", metin)  # renk kodları
     return metin

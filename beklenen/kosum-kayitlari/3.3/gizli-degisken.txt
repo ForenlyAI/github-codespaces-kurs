@@ -1,8 +1,0 @@
-$ gh secret list --app codespaces -R ForenlyAI/github-codespaces-lab
-ORNEK_ANAHTAR	2026-10-11T09:28:44Z
-$ gh codespace ssh -c kurs-lab-codespace-rr7jp56gpj52wwvx -- 'if [ -n "$ORNEK_ANAHTAR" ]; then echo "ORNEK_ANAHTAR tanımlı · ${#ORNEK_ANAHTAR} karakter"; else echo "ORNEK_ANAHTAR yok"; fi'
-ORNEK_ANAHTAR yok
-$ gh codespace ssh -c kurs-lab-codespace-rr7jp56gpj52wwvx -- 'grep -rl ORNEK_ANAHTAR /workspaces/github-codespaces-lab --include=*.py --include=*.txt --include=*.md | wc -l'
-0
-$ gh secret list --app codespaces -R ForenlyAI/github-codespaces-lab | wc -l
-0

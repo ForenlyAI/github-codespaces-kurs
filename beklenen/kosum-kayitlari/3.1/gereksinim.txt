@@ -1,7 +1,0 @@
-$ git switch -q main && git pull -q && git log --oneline -1
-5ca3e2c PR ve hata bildirimi şablonları
-$ cat requirements-dev.txt
-pytest==9.1.1
-ruff==0.16.0
-$ git add requirements-dev.txt && git commit -q -m "Geliştirme paketleri: pytest, ruff" && git push -q && git log --oneline -1
-97a9dce Geliştirme paketleri: pytest, ruff

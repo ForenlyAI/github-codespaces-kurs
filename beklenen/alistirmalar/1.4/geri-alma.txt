@@ -1,27 +1,27 @@
-$ git commit -am "KDV hesabını sadeleştir"
-[main 3ad87ae] KDV hesabını sadeleştir
+$ git commit -am "Başarı hesabını sadeleştir"
+[main 00f1a08] Başarı hesabını sadeleştir
  1 file changed, 1 insertion(+), 1 deletion(-)
 $ python -m pytest -q -p no:cacheprovider --tb=no -rf
 .F                                                                       [100%]
 =========================== short test summary info ============================
-FAILED test_ozet.py::test_kdv - AssertionError: assert Decimal('10948.00') ==...
+FAILED test_rapor.py::test_basari - AssertionError: assert 81.8 == 80.0
 1 failed, 1 passed in 0.00s
 $ git log --oneline -3
-3ad87ae KDV hesabını sadeleştir
-c218446 Merge branch 'bicim'
-7c83e30 Toplam satırının adı: ara toplam
+00f1a08 Başarı hesabını sadeleştir
+57589db Merge branch 'bicim'
+cadca6a Süre satırının adı: görev süresi toplamı
 $ git show --stat --format='%h %s' HEAD
-3ad87ae KDV hesabını sadeleştir
+00f1a08 Başarı hesabını sadeleştir
 
- ozet.py | 2 +-
+ rapor.py | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 $ git revert --no-edit HEAD
-[main f13bafd] Revert "KDV hesabını sadeleştir"
+[main fe35ab0] Revert "Başarı hesabını sadeleştir"
  1 file changed, 1 insertion(+), 1 deletion(-)
 $ python -m pytest -q -p no:cacheprovider
 ..                                                                       [100%]
 2 passed in 0.00s
 $ git log --oneline -3
-f13bafd Revert "KDV hesabını sadeleştir"
-3ad87ae KDV hesabını sadeleştir
-c218446 Merge branch 'bicim'
+fe35ab0 Revert "Başarı hesabını sadeleştir"
+00f1a08 Başarı hesabını sadeleştir
+57589db Merge branch 'bicim'

@@ -1,22 +1,22 @@
 $ git log --oneline --graph
-* 72e8ef5 Önbellek klasörleri izlenmesin
-* f13bafd Revert "KDV hesabını sadeleştir"
-* 3ad87ae KDV hesabını sadeleştir
-*   c218446 Merge branch 'bicim'
+* fee9b1c Önbellek klasörleri izlenmesin
+* fe35ab0 Revert "Başarı hesabını sadeleştir"
+* 00f1a08 Başarı hesabını sadeleştir
+*   57589db Merge branch 'bicim'
 |\  
-| * 64484b4 Toplamda binlik ayırıcı
-* | 7c83e30 Toplam satırının adı: ara toplam
+| * e4dc53e Süreyi tek ondalıkla yaz
+* | cadca6a Süre satırının adı: görev süresi toplamı
 |/  
-*   e852a06 Merge branch 'test-ekle'
+*   377c1c1 Merge branch 'test-ekle'
 |\  
-| * 266bbd3 Toplam ve KDV için test
-* | 7519c57 README: kullanım satırı
+| * b75eec8 Süre ve başarı için test
+* | 72948de README: kullanım satırı
 |/  
-* 95d237b KDV hesabı eklendi
-* 2f19c7e 7 Ekim siparişleri eklendi
-* c6d9533 Sipariş özeti: ilk sürüm
+* eea9c11 Başarı oranı eklendi
+* 299e616 Vardiyanın son 8 görevi eklendi
+* 91bdf02 Vardiya raporu: ilk sürüm
 $ git rev-list --count HEAD
 12
 $ git log --merges --oneline
-c218446 Merge branch 'bicim'
-e852a06 Merge branch 'test-ekle'
+57589db Merge branch 'bicim'
+377c1c1 Merge branch 'test-ekle'
