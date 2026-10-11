@@ -5,6 +5,7 @@ Para hesabı Decimal ile yapılır; kuruş yarım yukarı yuvarlanır.
 """
 
 import csv
+import sys
 from dataclasses import dataclass
 from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
@@ -32,18 +33,32 @@ def tl(tutar: Decimal) -> str:
 
 
 def oku(yol: str | Path) -> list[Siparis]:
-    """CSV dosyasını okur, her satırı bir Siparis yapar."""
+    """CSV dosyasını okur, her satırı bir Siparis yapar.
+
+    Adedi tam sayı olmayan satır atlanır; dosyadaki satır numarası (başlık 1. satır) stderr'e uyarı olarak yazılır.
+    """
+    siparisler = []
     with open(yol, encoding="utf-8", newline="") as f:
-        return [
-            Siparis(
-                tarih=s["tarih"],
-                urun=s["urun"],
-                adet=int(s["adet"]),
-                birim_fiyat=Decimal(s["birim_fiyat"]),
-                kdv_orani=Decimal(s["kdv_orani"]),
+        okuyucu = csv.DictReader(f)
+        for s in okuyucu:
+            try:
+                adet = int(s["adet"])
+            except (TypeError, ValueError):
+                print(
+                    f"Uyarı: {okuyucu.line_num}. satır atlandı, adet sayı değil: {s['adet']!r}",
+                    file=sys.stderr,
+                )
+                continue
+            siparisler.append(
+                Siparis(
+                    tarih=s["tarih"],
+                    urun=s["urun"],
+                    adet=adet,
+                    birim_fiyat=Decimal(s["birim_fiyat"]),
+                    kdv_orani=Decimal(s["kdv_orani"]),
+                )
             )
-            for s in csv.DictReader(f)
-        ]
+    return siparisler
 
 
 def ozet(siparisler: list[Siparis], tarih: str | None = None) -> dict:

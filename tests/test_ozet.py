@@ -51,3 +51,32 @@ def test_yazi_binlik_ayirac():
 def test_komut_satiri_olmayan_tarih(capsys):
     assert main([str(VERI), "--tarih", "2026-01-01"]) == 1
     assert "sipariş yok" in capsys.readouterr().err
+
+
+def test_adedi_bozuk_satir_atlanir_ve_uyarilir(tmp_path, capsys):
+    dosya = tmp_path / "siparisler.csv"
+    dosya.write_text(
+        "tarih,urun,adet,birim_fiyat,kdv_orani\n"
+        "2026-10-05,simit,2,17.50,10\n"
+        "2026-10-05,ekmek,on iki,15.00,1\n"
+        "2026-10-05,poğaça,3,22.00,10\n",
+        encoding="utf-8",
+    )
+    siparisler = oku(dosya)
+    assert [x.urun for x in siparisler] == ["simit", "poğaça"]
+    err = capsys.readouterr().err
+    assert "3. satır" in err
+    assert "on iki" in err
+
+
+def test_komut_satiri_bozuk_satirla_ozet_verir(tmp_path, capsys):
+    dosya = tmp_path / "siparisler.csv"
+    dosya.write_text(
+        "tarih,urun,adet,birim_fiyat,kdv_orani\n2026-10-05,ekmek,on iki,15.00,1\n2026-10-05,simit,2,17.50,10\n",
+        encoding="utf-8",
+    )
+    assert main([str(dosya)]) == 0
+    cikti = capsys.readouterr()
+    assert "2. satır atlandı" in cikti.err
+    assert "Satır: 1" in cikti.out
+    assert "Genel toplam: 38,50 TL" in cikti.out
