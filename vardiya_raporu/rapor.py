@@ -6,6 +6,7 @@ Başarı oranı yalnız iş görevlerinden (servis + toplama) hesaplanır; şarj
 """
 
 import json
+import sys
 from collections import Counter
 from dataclasses import dataclass
 from datetime import datetime
@@ -29,15 +30,18 @@ class Gorev:
 
 
 def oku(yol: str | Path) -> list[Gorev]:
-    """JSON Lines dosyasını okur, her satırı bir Gorev yapar."""
+    """JSON Lines dosyasını okur, her satırı bir Gorev yapar.
+
+    Okunamayan satır (ör. elektrik kesintisinde yarım yazılmış) atlanır, numarası stderr'e uyarı olarak yazılır.
+    """
     gorevler = []
     with open(yol, encoding="utf-8") as f:
-        for satir in f:
+        for no, satir in enumerate(f, start=1):
             if not satir.strip():
                 continue
-            k = json.loads(satir)
-            gorevler.append(
-                Gorev(
+            try:
+                k = json.loads(satir)
+                gorev = Gorev(
                     gorev_id=k["gorev_id"],
                     baslangic=datetime.fromisoformat(k["baslangic"]),
                     bitis=datetime.fromisoformat(k["bitis"]),
@@ -45,7 +49,10 @@ def oku(yol: str | Path) -> list[Gorev]:
                     sonuc=k["sonuc"],
                     hata_kodu=k.get("hata_kodu"),
                 )
-            )
+            except (ValueError, KeyError, TypeError):
+                print(f"Uyarı: {no}. satır bozuk, atlandı", file=sys.stderr)
+                continue
+            gorevler.append(gorev)
     return gorevler
 
 

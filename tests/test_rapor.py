@@ -52,3 +52,21 @@ def test_turkce_ondalik():
 def test_komut_satiri_olmayan_tur(capsys):
     assert main([str(VERI), "--tur", "temizlik"]) == 1
     assert "görev yok" in capsys.readouterr().err
+
+
+def test_yarim_satir_atlanir_ve_uyarilir(tmp_path, capsys):
+    satirlar = VERI.read_text(encoding="utf-8").splitlines()[:3]
+    dosya = tmp_path / "kesinti.jsonl"
+    dosya.write_text("\n".join([*satirlar, satirlar[0][:25]]) + "\n", encoding="utf-8")
+    assert len(oku(dosya)) == 3
+    assert "4. satır" in capsys.readouterr().err
+
+
+def test_komut_satiri_bozuk_satirla_rapor_verir(tmp_path, capsys):
+    satirlar = VERI.read_text(encoding="utf-8").splitlines()[:3]
+    dosya = tmp_path / "kesinti.jsonl"
+    dosya.write_text("\n".join([satirlar[0], '{"gorev_id": "G9', *satirlar[1:]]) + "\n", encoding="utf-8")
+    assert main([str(dosya)]) == 0
+    cikti = capsys.readouterr()
+    assert "2. satır" in cikti.err
+    assert "Görev: 3" in cikti.out
