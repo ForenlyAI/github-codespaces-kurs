@@ -1,0 +1,17 @@
+$ git switch -q main && git pull -q && git log --oneline -3
+fb4e329 CI: üç Python sürümü ve pip önbelleği
+e56b1fc Toplamı yuvarla (#3)
+e9b584b CI: her gönderimde ruff ve pytest
+$ git tag -a v0.1.0 -m "İlk sürüm: toplam, KDV, tarihe göre özet" && git push -q origin v0.1.0 && git tag
+v0.1.0
+$ gh release create v0.1.0 -R ForenlyAI/github-codespaces-lab --title "v0.1.0" --generate-notes
+https://github.com/ForenlyAI/github-codespaces-lab/releases/tag/v0.1.0
+$ gh release view v0.1.0 -R ForenlyAI/github-codespaces-lab --json tagName,name,body --jq '.body'
+## What's Changed
+* Tarihe göre özet by @ForenlyAI in https://github.com/ForenlyAI/github-codespaces-lab/pull/2
+* Toplamı yuvarla by @ForenlyAI in https://github.com/ForenlyAI/github-codespaces-lab/pull/3
+
+## New Contributors
+* @ForenlyAI made their first contribution in https://github.com/ForenlyAI/github-codespaces-lab/pull/2
+
+**Full Changelog**: https://github.com/ForenlyAI/github-codespaces-lab/commits/v0.1.0

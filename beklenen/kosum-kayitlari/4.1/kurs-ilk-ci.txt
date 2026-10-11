@@ -1,0 +1,34 @@
+$ git init -q -b main && git add -A && git status --short | wc -l
+29
+$ git commit -q -m "Kurs deposu: sipariş özeti aracı, devcontainer, CI, şablonlar" && git log --oneline
+b951104 Kurs deposu: sipariş özeti aracı, devcontainer, CI, şablonlar
+$ gh repo create ForenlyAI/github-codespaces-kurs --public --source . --remote origin --push --description "Forenly AI Academy · GitHub ve Codespaces ile Yazılım Geliştirme kursunun öğrenci deposu (şablon)" --homepage https://academy.forenly.ai
+https://github.com/ForenlyAI/github-codespaces-kurs
+branch 'main' set up to track 'origin/main'.
+To https://github.com/ForenlyAI/github-codespaces-kurs.git
+ * [new branch]      HEAD -> main
+$ gh run view 38128312822 -R ForenlyAI/github-codespaces-kurs
+
+✓ main CI · 38128312822
+Triggered via push about 1 minute ago
+
+JOBS
+✓ test (3.11) in 9s (ID 114437201182)
+✓ test (3.13) in 11s (ID 114437201356)
+✓ test (3.12) in 11s (ID 114437201393)
+
+ANNOTATIONS
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+test (3.11): .github#1
+
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+test (3.13): .github#1
+
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+test (3.12): .github#1
+
+
+$ gh run list -R ForenlyAI/github-codespaces-kurs -L 5
+completed	success	github_actions in /. - Update #1621287618	Dependabot Updates	main	dynamic	38128316540	36s	2026-10-11T09:25:27Z
+completed	success	pip in /. - Update #1621287613	Dependabot Updates	main	dynamic	38128316429	45s	2026-10-11T09:25:27Z
+completed	success	Kurs deposu: sipariş özeti aracı, devcontainer, CI, şablonlar	CI	main	push	38128312822	15s	2026-10-11T09:25:23Z

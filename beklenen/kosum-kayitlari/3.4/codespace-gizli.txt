@@ -1,0 +1,17 @@
+# gerçek kaydın kesiti: 3.4/codespace-claude.txt
+$ gh codespace ssh -c kurs-ogrenci-codespace-g5xg7vrq74rfjqv -- '[ -n "$ORNEK_ANAHTAR" ] && echo "ssh kabuğu: ORNEK_ANAHTAR tanımlı" || echo "ssh kabuğu: ORNEK_ANAHTAR yok"'
+ssh kabuğu: ORNEK_ANAHTAR yok
+$ gh codespace ssh -c kurs-ogrenci-codespace-g5xg7vrq74rfjqv -- 'bash -lc "[ -n \"\$ORNEK_ANAHTAR\" ] && echo oturum kabuğu: ORNEK_ANAHTAR tanımlı || echo oturum kabuğu: ORNEK_ANAHTAR yok"'
+oturum kabuğu: ORNEK_ANAHTAR tanımlı
+$ gh codespace ssh -c kurs-ogrenci-codespace-g5xg7vrq74rfjqv -- 'ls -a /workspaces/.codespaces/shared/ | grep -i env; grep -c "^ORNEK_ANAHTAR=" /workspaces/.codespaces/shared/.env-secrets'
+.env
+.env-secrets
+.environmentConfigurationCompleted
+environment-variables.json
+user-secrets-envs.json
+1
+$ gh codespace ssh -c kurs-ogrenci-codespace-g5xg7vrq74rfjqv -- '[ -n "$ANTHROPIC_API_KEY" ] && echo "ANTHROPIC_API_KEY tanımlı" || echo "ANTHROPIC_API_KEY tanımlı değil: claude ilk açılışta giriş ister"'
+ANTHROPIC_API_KEY tanımlı değil: claude ilk açılışta giriş ister
+$ gh codespace delete -c kurs-ogrenci-codespace-g5xg7vrq74rfjqv --force
+$ gh codespace list --json name --jq '[.[] | select(.name=="kurs-ogrenci-codespace-g5xg7vrq74rfjqv")] | length'
+0

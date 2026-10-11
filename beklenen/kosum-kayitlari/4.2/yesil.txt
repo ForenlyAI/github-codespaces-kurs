@@ -1,0 +1,19 @@
+$ python -m pytest -q -p no:cacheprovider && python ozet.py siparisler.csv
+...                                                                      [100%]
+3 passed in 0.02s
+Satır: 15
+Ara toplam: 12,608 TL
+KDV: 1094.80 TL
+$ git commit -q -am "Yuvarlama yalnız ekranda; hesap kuruşlu kalır" && git push -q
+$ gh pr checks toplam-yuvarla
+test	pass	7s	https://github.com/ForenlyAI/github-codespaces-lab/actions/runs/38128985168/job/114439184156	
+$ gh pr merge toplam-yuvarla --squash --delete-branch
+Updating e9b584b..e56b1fc
+Fast-forward
+ ozet.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+From https://github.com/ForenlyAI/github-codespaces-lab
+ * branch            main       -> FETCH_HEAD
+   e9b584b..e56b1fc  main       -> origin/main
+$ gh pr view 3 --json state --jq .state
+MERGED

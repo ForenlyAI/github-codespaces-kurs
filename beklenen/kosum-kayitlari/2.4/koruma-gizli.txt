@@ -1,0 +1,2 @@
+$ gh api -X PUT repos/ForenlyAI/github-codespaces-lab/branches/main/protection --input ../koruma.json
+{"message":"Upgrade to GitHub Pro or make this repository public to enable this feature.","documentation_url":"https://docs.github.com/rest/branches/branch-protection#update-branch-protection","status":"403"}gh: Upgrade to GitHub Pro or make this repository public to enable this feature. (HTTP 403)
