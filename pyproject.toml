@@ -1,0 +1,17 @@
+[project]
+name = "siparis-ozeti"
+version = "0.1.0"
+description = "Küçük bir fırının günlük sipariş özeti (Forenly AI Academy · GitHub ve Codespaces kursu)"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501"]  # uzun satırı biçimlendirici böler; uzun metin satırları serbest

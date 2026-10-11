@@ -1,0 +1,22 @@
+$ git log --oneline --graph
+* 72e8ef5 Önbellek klasörleri izlenmesin
+* f13bafd Revert "KDV hesabını sadeleştir"
+* 3ad87ae KDV hesabını sadeleştir
+*   c218446 Merge branch 'bicim'
+|\  
+| * 64484b4 Toplamda binlik ayırıcı
+* | 7c83e30 Toplam satırının adı: ara toplam
+|/  
+*   e852a06 Merge branch 'test-ekle'
+|\  
+| * 266bbd3 Toplam ve KDV için test
+* | 7519c57 README: kullanım satırı
+|/  
+* 95d237b KDV hesabı eklendi
+* 2f19c7e 7 Ekim siparişleri eklendi
+* c6d9533 Sipariş özeti: ilk sürüm
+$ git rev-list --count HEAD
+12
+$ git log --merges --oneline
+c218446 Merge branch 'bicim'
+e852a06 Merge branch 'test-ekle'

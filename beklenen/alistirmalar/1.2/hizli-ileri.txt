@@ -1,0 +1,19 @@
+$ git switch -c kdv
+Switched to a new branch 'kdv'
+$ git commit -am "KDV hesabı eklendi"
+[kdv 95d237b] KDV hesabı eklendi
+ 1 file changed, 5 insertions(+)
+$ git switch main
+Switched to branch 'main'
+$ git merge kdv
+Updating 2f19c7e..95d237b
+Fast-forward
+ ozet.py | 5 +++++
+ 1 file changed, 5 insertions(+)
+$ git branch
+  kdv
+* main
+$ python ozet.py siparisler.csv
+Satır: 15
+Toplam: 12608.50 TL
+KDV: 1094.80 TL

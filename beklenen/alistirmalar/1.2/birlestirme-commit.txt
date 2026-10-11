@@ -1,0 +1,29 @@
+$ git switch -c test-ekle
+Switched to a new branch 'test-ekle'
+$ git add test_ozet.py
+$ git commit -m "Toplam ve KDV için test"
+[test-ekle 266bbd3] Toplam ve KDV için test
+ 1 file changed, 11 insertions(+)
+ create mode 100644 test_ozet.py
+$ git switch main
+Switched to branch 'main'
+$ git commit -am "README: kullanım satırı"
+[main 7519c57] README: kullanım satırı
+ 1 file changed, 2 insertions(+)
+$ git merge --no-edit test-ekle
+Merge made by the 'ort' strategy.
+ test_ozet.py | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 test_ozet.py
+$ git log --oneline --graph
+*   e852a06 Merge branch 'test-ekle'
+|\  
+| * 266bbd3 Toplam ve KDV için test
+* | 7519c57 README: kullanım satırı
+|/  
+* 95d237b KDV hesabı eklendi
+* 2f19c7e 7 Ekim siparişleri eklendi
+* c6d9533 Sipariş özeti: ilk sürüm
+$ python -m pytest -q -p no:cacheprovider
+..                                                                       [100%]
+2 passed in 0.01s

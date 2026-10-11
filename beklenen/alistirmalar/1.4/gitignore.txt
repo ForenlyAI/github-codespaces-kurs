@@ -1,0 +1,14 @@
+$ git status --short
+?? __pycache__/
+$ cat .gitignore
+__pycache__/
+.pytest_cache/
+.venv/
+$ git status --short
+?? .gitignore
+$ git add .gitignore
+$ git commit -m "Önbellek klasörleri izlenmesin"
+[main 72e8ef5] Önbellek klasörleri izlenmesin
+ 1 file changed, 3 insertions(+)
+ create mode 100644 .gitignore
+$ git status --short

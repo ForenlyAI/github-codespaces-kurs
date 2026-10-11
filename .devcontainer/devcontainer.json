@@ -1,0 +1,25 @@
+{
+  "name": "Sipariş özeti (Python 3.12)",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/sshd:1": {},
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {}
+  },
+  "postCreateCommand": "pip install --user -r requirements-dev.txt",
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": { "label": "özet raporu", "onAutoForward": "notify" }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-python.python", "charliermarsh.ruff"]
+    }
+  },
+  "secrets": {
+    "ANTHROPIC_API_KEY": {
+      "description": "İsteğe bağlı: Codespace içinde Claude Code için. Değeri hiçbir dosyaya yazmayın.",
+      "documentationUrl": "https://docs.anthropic.com/en/docs/claude-code/devcontainer"
+    }
+  }
+}

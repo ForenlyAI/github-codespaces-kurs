@@ -1,0 +1,23 @@
+$ git switch -c bicim
+Switched to a new branch 'bicim'
+$ git commit -am "Toplamda binlik ayırıcı"
+[bicim 64484b4] Toplamda binlik ayırıcı
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+$ git switch main
+Switched to branch 'main'
+$ git commit -am "Toplam satırının adı: ara toplam"
+[main 7c83e30] Toplam satırının adı: ara toplam
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+$ git merge bicim
+Auto-merging ozet.py
+CONFLICT (content): Merge conflict in ozet.py
+Automatic merge failed; fix conflicts and then commit the result.
+$ git status --short
+UU ozet.py
+?? __pycache__/
+$ grep -n -A4 '<<<<<<<' ozet.py
+23:<<<<<<< HEAD
+24-    print(f"Ara toplam: {toplam(satirlar)} TL")
+25-=======
+26-    print(f"Toplam: {toplam(satirlar):,.2f} TL")
+27->>>>>>> bicim

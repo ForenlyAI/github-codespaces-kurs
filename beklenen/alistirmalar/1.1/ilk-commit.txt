@@ -1,0 +1,22 @@
+$ git init -b main
+Initialized empty Git repository in siparis-ozeti/.git/
+$ git status --short
+?? README.md
+?? ozet.py
+?? siparisler.csv
+$ git add README.md ozet.py siparisler.csv
+$ git status --short
+A  README.md
+A  ozet.py
+A  siparisler.csv
+$ git commit -m "Sipariş özeti: ilk sürüm"
+[main (root-commit) c6d9533] Sipariş özeti: ilk sürüm
+ 3 files changed, 33 insertions(+)
+ create mode 100644 README.md
+ create mode 100644 ozet.py
+ create mode 100644 siparisler.csv
+$ git log --oneline
+c6d9533 Sipariş özeti: ilk sürüm
+$ python ozet.py siparisler.csv
+Satır: 10
+Toplam: 7777.50 TL

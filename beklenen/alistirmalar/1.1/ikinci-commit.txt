@@ -1,0 +1,15 @@
+$ git status --short
+ M siparisler.csv
+$ git diff --stat
+ siparisler.csv | 5 +++++
+ 1 file changed, 5 insertions(+)
+$ git add siparisler.csv
+$ git commit -m "7 Ekim siparişleri eklendi"
+[main 2f19c7e] 7 Ekim siparişleri eklendi
+ 1 file changed, 5 insertions(+)
+$ git log --oneline
+2f19c7e 7 Ekim siparişleri eklendi
+c6d9533 Sipariş özeti: ilk sürüm
+$ python ozet.py siparisler.csv
+Satır: 15
+Toplam: 12608.50 TL

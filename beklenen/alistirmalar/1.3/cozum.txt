@@ -1,0 +1,24 @@
+$ grep -c -E '^(<<<<<<<|=======|>>>>>>>)' ozet.py
+0
+$ git diff --check
+$ python -m pytest -q -p no:cacheprovider
+..                                                                       [100%]
+2 passed in 0.00s
+$ python ozet.py siparisler.csv
+Satır: 15
+Ara toplam: 12,608.50 TL
+KDV: 1094.80 TL
+$ git add ozet.py
+$ git commit --no-edit
+[main c218446] Merge branch 'bicim'
+$ git log --oneline --graph -6
+*   c218446 Merge branch 'bicim'
+|\  
+| * 64484b4 Toplamda binlik ayırıcı
+* | 7c83e30 Toplam satırının adı: ara toplam
+|/  
+*   e852a06 Merge branch 'test-ekle'
+|\  
+| * 266bbd3 Toplam ve KDV için test
+* | 7519c57 README: kullanım satırı
+|/  
