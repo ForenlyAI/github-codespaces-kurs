@@ -1,4 +1,4 @@
-# GitHub ve Codespaces ile Yazılım Geliştirme · kurs deposu
+# GitHub ve Codespaces'le Kodlama · kurs deposu
 
 Forenly AI Academy kursunun öğrenci dosyaları. Kurs boyunca kafede çay servisi yapan bir insansı robotun görev
 kayıtlarından vardiya raporu çıkaran komut satırı aracı üzerinde çalışırsınız: önce yerelde Git, sonra GitHub'da issue ve pull request, sonra
